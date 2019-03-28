@@ -17,22 +17,33 @@ request(
 	function (error, response, body) {
 
 		myData = (JSON.parse(body));
-		//console.log("@@@mydata : "+JSON.stringify(myData));
+		console.log("@@@mydata : "+JSON.stringify(myData));
 		//console.log(body.success);
 		console.log(myData.result[0].number);
-		var count = Object.keys(body).length;
+		var count = Object.keys(myData.result).length;
 		console.log(count);
-		
-		/* myData.result.map(element=>(
+		var numberarr;
+		var i;
+		for(i = 0; i<count; i++){
+			numberarr = myData.result[i].number;
+			//console.log(numberarr[i]);
+		}
+		for(i = 0; i<1; i++){
+			console.log(numberarr[i]);
+		}
+		DATABASE_URL : postgres://awwdjptnkhqero:ecaa929e501c53b57dc9ee62b5c25b32e7b018ad957f1a1d71fa43c3bc6efd80@db:5432/dl7ae9k9q3c17;
+		myData.result.map(element=>(
 			pool.connect(process.env.DATABASE_URL, function(err, client, done) {
-				client.query('INSERT INTO table(Reason__c, Status__c, Ticket_Closed_On__c, Ticket_Number__c, Ticket_Opened_On__c, Ticket_Owner__c, Ticket_Raised_By__c, Urgency__c) VALUES (element.hold_reason, element.state , element.closed_at, element.number, element.sys_created_on, element.sys_created_by, element.sys_created_by, element.urgency)', 
+				client.query('INSERT INTO Service_Now__c(Reason__c, Status__c, Ticket_Closed_On__c, Ticket_Number__c, Ticket_Opened_On__c, Ticket_Owner__c, Ticket_Raised_By__c, Urgency__c) VALUES (element.hold_reason, element.state , element.closed_at, element.number, element.sys_created_on, element.sys_created_by, element.sys_created_by, element.urgency)', 
 				function(err, result) {
 					done();
-					if(err) return console.error(err);
-					console.log(result.rows);
+					 if(err) {
+						return console.error(err);
+						console.log(result.rows);
+					}
 				});
 			})
-		)) */
+		)) 
 		
 	/*  body.result.map(element=>(
 	conole.log(element.parent))) */
